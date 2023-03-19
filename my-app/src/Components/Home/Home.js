@@ -1,16 +1,16 @@
 import React from "react";
 import Header from "../Header";
-import Search from "./Search";
 import QuickSearch from "./QuickSearch";
-import Review from "./Review";
+import Footer from "../Footer";
+
 
 const Home =()=>{
     return(
         <>
         <Header/>
-        <Search/>
+        
         <QuickSearch/>
-        <Review/>
+        
         </>
     )
 

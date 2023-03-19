@@ -1,0 +1,6 @@
+mealData = productData
+listMeal = ListData
+
+https://restapi-production-b94c.up.railway.app/api/features
+
+https://restapi-production-b94c.up.railway.app/api/reviews

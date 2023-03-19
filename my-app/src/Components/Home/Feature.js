@@ -1,37 +1,37 @@
 import React from "react";
-import './Feature.css'
-const Feature =()=>{
-    return(
+ 
+const Feature = (props) => {
+    console.log(props)
+    const listFeature = ({featureData})=>{
+        // console.log(featureData.products.feature)
+        if(featureData){
+            return(
+                featureData.products.map((item)=>{
+                    return(
+                        <div className="tileContainer">
+                        <div className="tileComponent1">
+                            <img src={item.feature[0].feature_image} alt={item.feature[0].feature_heading}/>
+                        </div>
+                        <div className="compSubHeading">
+                            {item.feature[0].feature_heading} {item.feature[0].feature_txt}
+                        </div>
+                    </div>   
+                    )
+                })
+            )
+        }
+    }
+    
+    return (
         <>
             <div className="container">
-            <h1 class="display-4">Feature</h1>
                 <div className="row">
-                    <div className="card">
-                        <img className="card-img-top" src="https://i.ibb.co/cwXwx3Z/mix-vegetable.jpg" alt="Card image cap"/>
-                        <div className="card-body">
-                            <p className="card-text">fresh Vegetables</p>
-                        </div>
-                    </div>
-
-                    <div className="card">
-                        <img className="card-img-top" src="https://i.ibb.co/98Rp328/rowan-freeman-cl-Ylm-Ca-Qbz-Y-unsplash.jpg" alt="Card image cap"/>
-                        <div className="card-body">
-                            <p className="card-text">Delivery fast</p>
-                        </div>
-                    </div>
-                    <div className="card">
-                        <img className="card-img-top" src="https://i.ibb.co/G3HprFG/easy-pmt.jpg" alt="Card image cap"/>
-                        <div className="card-body">
-                            <p className="card-text">Easy Payment</p>
-                        </div>
-                    </div>
+                    {listFeature(props)}
+                    <h1>Feature page</h1>
                 </div>
             </div>
-            
-            
         </>
     )
 }
 
 export default Feature;
-

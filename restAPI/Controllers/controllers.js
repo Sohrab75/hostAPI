@@ -1,9 +1,32 @@
-const product = require('../Model/model')
+const Product = require('../Model/model')
+const review = require('../Model/model2')
+const feature = require('../Model/model1')
+const category = require('../Model/model3')
+const Order = require('../Model/modelOrder')
+
 
 const getAllProducts = async (req, res)=>{
-    const {name, type, sort, select} = req.query;
-    const queryObject ={};
+    const {name, type, sort, select,feature,review, categoryId,id, cost} = req.query;
+    let queryObject ={};
 
+    if (categoryId) {
+        let catId = Number(req.query.categoryId);
+        queryObject = {"category_id":catId};
+    }
+    if(id){
+        let id = Number(req.query.id);
+        queryObject = {"id":id};
+        
+    }
+
+    if(review){
+        queryObject.review={$regex:review, $options:"i"};
+        console.log(queryObject.review);
+    }
+    if(feature){
+        queryObject.feature={$regex:feature, $options:"i"};
+        console.log(queryObject.feature);
+    }
     if(name){
         queryObject.name={$regex:name, $options:"i"};
         console.log(queryObject.name);
@@ -12,9 +35,9 @@ const getAllProducts = async (req, res)=>{
         queryObject.type={$regex:type, $options:"i"};
         
     }
-    let apiData= product.find(queryObject);
+    let apiData= Product.find(queryObject);
      if(sort){
-        let sortFix = sort.replace(",").join(" ");
+        let sortFix = sort.split(",").join(" ");
         apiData= apiData.sort(sortFix);
      }
 
@@ -40,15 +63,39 @@ const getAllProducts = async (req, res)=>{
     
 };
 
+const getAllProductsTesting = async (rq, res)=>{
+    const myData= await Product.find(req.query).select("name cost")
+}
 
 
-const getAllProductsTesting = async (req, res)=>{
-    const products = await product.find(req.query).select("name cost");
-    res.status(200).json({products});
-    
-};
+const getAllFeatureData = async (req, res)=>{
+    const features =await feature.find(req.query)
+    res.status(200).json({features});
+
+}
+
+const getAllReviewData = async (req, res)=>{
+    const reviews =await review.find(req.query)
+    res.status(200).json({reviews});
+
+}
+
+const getAllCategoryData = async (req, res)=>{
+    const categories =await category.find(req.query)
+    res.status(200).json({categories});
+}
+
+const getAllOrders = async (req, res)=>{
+    const orders =await Order.find({})
+    console.log(orders)
+    res.status(200).json({orders});
+}
 
 module.exports = {
     getAllProducts,
-    getAllProductsTesting
+    getAllProductsTesting,
+    getAllFeatureData,
+    getAllReviewData,
+    getAllCategoryData,
+    getAllOrders
 };

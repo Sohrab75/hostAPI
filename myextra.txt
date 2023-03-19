@@ -1,0 +1,4 @@
+allproducts ==  https://enigmatic-squirrel-production.up.railway.app/api/products
+
+category wise == https://enigmatic-squirrel-production.up.railway.app/api/products?type=veg
+

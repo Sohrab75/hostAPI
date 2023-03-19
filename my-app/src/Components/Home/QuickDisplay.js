@@ -1,69 +1,41 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const QuickDisplay =()=>{
+const QuickDisplay = (props)=>{
+    // console.log(props)
+
+    const listProd = ({mealData})=>{
+        if(mealData){
+            return mealData.categories.map((item, index) => {
+                // console.log(item.category_id);
+                return(
+                    
+                    <Link to={`/listing/${item.category_id}`} category_id={item.category_id} key={index}>
+                        
+                    <div className="tileContainer" key={item.category_id}>
+                        <div className="tileComponent1">
+                            <img src={item.category_img} alt={item.category_name}/>
+                        </div>
+                        <div className="tileComponent2">
+                            <a href="../listing/Listing.html">{item.type}</a>
+                        </div>
+                        <h1> {item.category_id} </h1>
+                        <div className="compSubHeading">
+                            {item.category_name} {item.category_txt}
+                        </div>
+                    </div>
+                </Link>
+                )
+            })
+        }
+    }
+
     return(
-        <>
-            <div className="container">
-            <h1 class="display-4">Products</h1>
-                <div className="row">
-                    <div className="card">
-                        <img className="card-img-top" src="https://i.ibb.co/hM0gctk/12-broccoli.png" alt="Card image cap"/>
-                        <div className="card-body">
-                            <p className="card-text">fresh barcoli</p>
-                        </div>
-                    </div>
-
-                    <div className="card">
-                        <img className="card-img-top" src="https://i.ibb.co/4RS5tGB/6-cabbage-png-image.png" alt="Card image cap"/>
-                        <div className="card-body">
-                            <p className="card-text">fresh Cabbage</p>
-                        </div>
-                    </div>
-                    <div className="card">
-                        <img className="card-img-top" src="https://i.ibb.co/Sxy9BLZ/carrot-juice-ge2913f356-640.jpg" alt="Card image cap"/>
-                        <div className="card-body">
-                            <p className="card-text">fresh Carrot</p>
-                        </div>
-                    </div>
-
-                    <div className="card">
-                        <img className="card-img-top" src="https://i.ibb.co/pPs4203/ginger-gecde27da7-640.jpg" alt="Card image cap"/>
-                        <div className="card-body">
-                            <p className="card-text">fresh Ginger</p>
-                        </div>
-                    </div>
-
-                    <div className="card">
-                        <img className="card-img-top" src="https://i.ibb.co/yVKhGjt/onions-ga291e7cef-640.jpg" alt="Card image cap"/>
-                        <div className="card-body">
-                            <p className="card-text">fresh Onion</p>
-                        </div>
-                    </div>
-                    <div className="card">
-                        <img className="card-img-top" src="https://i.ibb.co/DpbZnjz/potatoes-ga6dac239f-640.jpg" alt="Card image cap"/>
-                        <div className="card-body">
-                            <p className="card-text">fresh Potato</p>
-                        </div>
-                    </div>
-                    <div className="card">
-                        <img className="card-img-top" src="https://i.ibb.co/M7Hp1Ct/grapes.jpg" alt="Card image cap"/>
-                        <div className="card-body">
-                            <p className="card-text">fresh Grapes</p>
-                        </div>
-                    </div>
-                    <div className="card">
-                        <img className="card-img-top" src="https://i.ibb.co/9rfvWZd/strawberry-juice.jpg" alt="Card image cap"/>
-                        <div className="card-body">
-                            <p className="card-text">fresh StrawBerry</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            
-        </>
+        <div className="mainBox">
+            {listProd(props)}
+           
+        </div>
     )
 }
 
 export default QuickDisplay;
-
